@@ -1,10 +1,10 @@
 <?php
-	namespace controllers;
+	namespace BHLst\controllers;
 
-	use controllers\MainController;
+	use BHLst\controllers\Controller;
 
 
-	class HomeController extends MainController {
+	class MainController extends Controller {
 
 		public function __constuct(){
 			parent::__constuct();
