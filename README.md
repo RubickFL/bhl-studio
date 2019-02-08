@@ -1,0 +1,3 @@
+#BHL-STUDIO present
+        It's a new version of GeekStudio which will have more technical updates,
+	I'm going to start create core now so let see...
