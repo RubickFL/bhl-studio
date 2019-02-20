@@ -1,20 +1,14 @@
 <?php
-	namespace BHLst\controllers;
+	namespace BHLst\name1\controllers;
 
 	if(!defined("AccPoint")) exit("ACCESS DENIED");
 	
 	use BHLst\controllers\MainController;
-	use BHLst\helper\CustomHelper;
 
 	class HomeController extends MainController {
 
 		public function __constuct(){
-			parent::__constuct();
-			//$this->loadModel("Custom",'custom');
-		}
-
-		public function titleModule(){
-			return false;
+			parent::__construct();
 		}
 
 		public function index(){
@@ -22,18 +16,22 @@
 		}
 
 		public function about(){
-			$this->data('var','contAD');
-			$this->display('about');
+			echo 'about';
+		}
+
+		function titleModule(){
+			return 'name1';
 		}
 
 		public function info($a){
+			echo "IT'S MODULE<br>";
 			$this->loadModel('User','user');
 
 			$user = $this->user->get();
 
 			$this->data('user',$user);
-			$this->data('var',$a);
-			$this->display('info');
+			$this->data("var",$a);
+			$this->display('about');
 		}
 
 	}

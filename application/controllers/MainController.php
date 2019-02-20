@@ -1,5 +1,7 @@
 <?php
 	namespace BHLst\controllers;
+	
+	if(!defined("AccPoint")) exit("ACCESS DENIED");
 
 	use BHLst\controllers\Controller;
 
