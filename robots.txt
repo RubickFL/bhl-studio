@@ -1,5 +1,6 @@
 User-Agent: *
-Dissalow: /
+Dissalow: 
+
 Allow: /index.php
 
 User-Agent: Yandex

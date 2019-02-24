@@ -4,37 +4,29 @@
 	if(!defined("AccPoint")) exit("ACCESS DENIED");
 	
 	use BHLst\controllers\MainController;
-	use BHLst\helper\CustomHelper;
+	use BHLst\helpers\InputHelper;
 
 	class HomeController extends MainController {
 
-		public function __constuct(){
-			parent::__constuct();
-			//$this->loadModel("Custom",'custom');
+
+		public function __construct(){
+			parent::__construct();
+			$this->loadHelper('InputHelper');
+			$this->loadModel('User','user');
 		}
 
-		public function titleModule(){
-			return false;
-		}
-
-		public function index(){
+		public function info( $test ){
 			echo "Hello World";
+			$login = InputHelper::input($_GET['login']);
+			$users = $this->user->getByLogin('"test"');
+			$this->data('user',$users);
+			$this->display('users');
 		}
 
 		public function about(){
-			$this->data('var','contAD');
-			$this->display('about');
+
+
+
 		}
-
-		public function info($a){
-			$this->loadModel('User','user');
-
-			$user = $this->user->get();
-
-			$this->data('user',$user);
-			$this->data('var',$a);
-			$this->display('info');
-		}
-
 	}
 ?>

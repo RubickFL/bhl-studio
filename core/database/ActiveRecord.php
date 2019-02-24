@@ -8,15 +8,22 @@
 
         private $_select;
         private $_from;
-        private $_join;
         private $_where = '';
+        private $_update = array();
+
+        private $_join;
         private $_orderBy='';
         private $_groupBy='';
+
         private $_limit = '';
 
         private $_prepared = array();
         
         private $_lastWhereEqual = '';
+
+        private $_typeQuery = "select";
+
+        private $_trunctate = '';
 
         public function __construct(){
 
@@ -83,6 +90,25 @@
             }
         }
 
+        /** TABLE MANAGEMENT */
+
+        public function truncate($titleTable){
+            $this->_truncate = 'TRUNCATE TABLE ' . $titleTable;
+            $this->_typeQuery = "truncate";
+        }
+
+        public function delete(){
+            $this->_typeQuery = "delete";
+        }
+
+        public function update($updData){
+            for($i = 0; $i < count($updData); $i++){
+                $this->_update = $updData[$i]['field'] . ' = ' . $updData[$i]['value'] . ', ';
+            }
+            $this->_update = trim($this->_update,',') . ' ';
+            $this->_typeQuery = "update";
+        }
+
         /* GET_DATA COMMANDS */
 
         public function addPrepare($key,$value){
@@ -105,9 +131,42 @@
             if( $this->_where !==  '')
                 $this->_where = "WHERE " . $this->_where . ' ';
 
-            $sqlRequest = $this->_select . $this->_from . $this->_join . $this->_where . $this->_groupBy .  $this->_orderBy . $this->_limit;
+            switch($this->_typeQuery) {
+                case "select" : 
+                    $sqlRequest = $this->_select . $this->_from . $this->_join . $this->_where . $this->_groupBy .  $this->_orderBy . $this->_limit; 
+                    break;
+                case "update" : 
+                    $sqlRequest = "UPDATE " . $this->_from . "SET " . $this->_update . $this->_where; 
+                    break;
+                case "delete" : 
+                    $sqlRequest =   "DELETE " . $this->_from . $this->_join . $this->_where . $this->_groupBy . $this->_orderBy . $this->_limit; 
+                    break;
+                case "truncate" :  
+                    $sqlRequest = $this->_truncate;
+                    break;
+
+                default:;
+            }
 
             return $sqlRequest;
+        }
+
+        public function clear(){
+            $this->_select = "SELECT *";
+            $this->_from;
+            $this->_where = '';
+            $this->_update = array();
+            $this->_trunctate = '';
+
+
+            $this->_join;
+            $this->_orderBy='';
+            $this->_groupBy='';
+            $this->_limit = '';
+
+            $this->_prepared = array();
+            $this->_lastWhereEqual = '';
+            $this->_typeQuery = "select";
         }
     }
 

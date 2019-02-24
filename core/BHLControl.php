@@ -2,9 +2,6 @@
 
 namespace BHLst\core;
 
-use BHLst\database\Database;
-
-
 if(!defined("AccPoint")) exit("Access denied");
 
 class Studio {
@@ -45,7 +42,25 @@ class Studio {
     }
 
     public function loadDataBase(){
-        $db = new Database();
+
+        $db = null;
+
+        switch ($this->_config['DataBase']['engine']) {
+            case 'pdo':
+                require_once("core/database/engines/Database.php");
+                $db = new \BHLst\database\Database();
+                $db->setEngine("mysql");
+                break;
+            
+            case 'mysql':
+                require_once("core/database/engines/mysql/MySQLi.php");
+                $db = new \BHLst\database\mysql\MySql();                
+                break;
+
+            default:
+                break;
+        }
+
 
         $db->setHost($this->_config["DataBase"]['host']);
         $db->setPort($this->_config["DataBase"]['port']);

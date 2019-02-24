@@ -14,7 +14,7 @@
         }
 
         public function get(){
-            $this->db->select('*');
+            $this->db->delete();
             $this->db->from($this->_table);
             $this->db->condition('name',':name');
 
@@ -26,6 +26,13 @@
                     ),
                 )
             );
+            return $this->exec();
+        }
+
+        public function getByLogin($login){
+            $this->db->select('pass');
+            $this->db->from($this->_table);
+            $this->db->condition('name',$login);
             return $this->exec();
         }
     }

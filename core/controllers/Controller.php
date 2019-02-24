@@ -8,6 +8,7 @@ class Controller {
 
     private $_variables;
 
+
     public function __construct(){
         $this->_variables = array();
     }
@@ -44,16 +45,16 @@ class Controller {
     }
 
     function loadHelper($titleHelper){
-         $pathCoreHelper = 'core/helpers/'.$titleHelper.'.php';
-         $pathAppliacationHelper ='application/helpers/'.$titleHelper.'.php';
+        $pathCoreHelper = 'core/helpers/'.$titleHelper.'.php';
+        $pathAppliacationHelper ='application/helpers/'.$titleHelper.'.php';
 
-         if(file_exists($pathCoreHelper)){
-            require_once($pathCoreHelper);
-            return true;
-         }elseif(file_exists($pathAppliacationHelper)){
-            require_once($pathAppliacationHelper);
-            return true;   
-         }
+        if(file_exists($pathCoreHelper)){
+           require_once($pathCoreHelper);
+           return true;
+        }elseif(file_exists($pathAppliacationHelper)){
+           require_once($pathAppliacationHelper);
+           return true;   
+        }
     }
 
     function loadLibrary($titleLibrary,$aliasLibrary){
@@ -95,7 +96,7 @@ class Controller {
         }
 
         return false;
-
     }
+
 }
 ?>

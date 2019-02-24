@@ -8,12 +8,14 @@
 
 	class MainController extends Controller {
 
-		public function __constuct(){
-			parent::__constuct();
+
+		public function __construct(){
+			parent::__construct();
+			$this->var = "512";
 		}
 
-		public function index(){
-			echo "Hello World";
+		public function titleModule(){
+			return false;
 		}
 	}
 ?>

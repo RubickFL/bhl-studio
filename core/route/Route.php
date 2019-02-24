@@ -80,13 +80,12 @@ class Route {
         $params = array_values($data);
 
         if(file_exists($pathController))
-            require_once($pathController);
+            require_once($pathController); 
 
         if(class_exists($titleController) && method_exists($titleController,$titleMethod)) {
-
             $customController = new $titleController();
             call_user_func_array(array($customController,$titleMethod),$params);
-
+            
             return true;
         }    
 
